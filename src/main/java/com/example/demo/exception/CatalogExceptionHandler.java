@@ -42,6 +42,15 @@ public class CatalogExceptionHandler {
         return new ErrorDto("failed.validation.for.request.body", message.toString(), HttpStatus.BAD_REQUEST.value());
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDto handleBadRequest (Exception exception) {
+        BaseException baseException = (BaseException) exception;
+
+        logger.warn("Bad request exception", exception);
+        return new ErrorDto(baseException.getErrorCode(), baseException.getMessage(), HttpStatus.BAD_REQUEST.value());
+    }
+
 
     @ExceptionHandler
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)

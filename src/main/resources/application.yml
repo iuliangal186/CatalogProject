@@ -21,3 +21,4 @@ spring:
       path: /h2-console-catalog  # http://localhost:8888/catalog/h2-console-catalog
 
 test.value: Spring
+insert.start.data: true

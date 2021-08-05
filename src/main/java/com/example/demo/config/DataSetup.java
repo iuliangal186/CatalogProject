@@ -1,30 +1,47 @@
 package com.example.demo.config;
 
 import com.example.demo.model.Subject;
+import com.example.demo.model.Teacher;
 import com.example.demo.repository.SubjectRepository;
+import com.example.demo.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnExpression("${insert.start.data}")
 public class DataSetup implements ApplicationRunner {
     private final SubjectRepository subjectRepository;
+    private final TeacherRepository teacherRepository;
+
+//    @Value("${insert.start.data}")
+//    private Boolean insertData;
 
     @Autowired
-    public DataSetup(SubjectRepository subjectRepository) {
+    public DataSetup(SubjectRepository subjectRepository, TeacherRepository teacherRepository) {
         this.subjectRepository = subjectRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        saveSubject("OOP", 5, false, 60, 40);
-        saveSubject("math", 6, false, 70, 30);
-        saveSubject("Chemistry", 4, true, 60, 40);
-        saveSubject("Biology", 5, false, 40, 60);
-        saveSubject("Sport", 2, true, 60, 40);
-        saveSubject("Data Structures", 5, false, 10, 90);
+//        if (insertData) {
+            saveSubject("OOP", 5, false, 60, 40);
+            saveSubject("math", 6, false, 70, 30);
+            saveSubject("Chemistry", 4, true, 60, 40);
+            saveSubject("Biology", 5, false, 40, 60);
+            saveSubject("Sport", 2, true, 60, 40);
+            saveSubject("Data Structures", 5, false, 10, 90);
 
+            addTeacher("FirstName1", "LastName1", "2344565748394", 99999L);
+            addTeacher("FirstName2", "LastName2", "2344565748394", 99999L);
+            addTeacher("FirstName3", "LastName3", "2344565748394", 99999L);
+            addTeacher("FirstName4", "LastName4", "2344565748394", 99999L);
+            addTeacher("FirstName5", "LastName5", "2344565748394", 99999L);
+ //       }
 
     }
 
@@ -39,4 +56,13 @@ public class DataSetup implements ApplicationRunner {
         subjectRepository.save(subject);
     }
 
+    private void addTeacher(String firstName, String lastName, String cnp, Long salary) {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(firstName);
+        teacher.setLastName(lastName);
+        teacher.setCnp(cnp);
+        teacher.setSalary(salary);
+
+        teacherRepository.save(teacher);
+    }
 }

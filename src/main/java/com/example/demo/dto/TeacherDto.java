@@ -3,46 +3,35 @@ package com.example.demo.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TeacherDto {
+public class TeacherDto extends TeacherBasicInfoDto{
 
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private LocalDate emplymentDate;
+    private LocalDate employmentDate;
     private LocalDate birthDay;
+    private String cnp;
+    private Long salary;
 
-    List<SubjectDto> subjects;
-
-    public Long getId() {
-        return id;
+    public String getCnp() {
+        return cnp;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCnp(String cnp) {
+        this.cnp = cnp;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Long getSalary() {
+        return salary;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setSalary(Long salary) {
+        this.salary = salary;
     }
 
-    public String getLastName() {
-        return lastName;
+    public LocalDate getEmploymentDate() {
+        return employmentDate;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getEmplymentDate() {
-        return emplymentDate;
-    }
-
-    public void setEmplymentDate(LocalDate emplymentDate) {
-        this.emplymentDate = emplymentDate;
+    public void setEmploymentDate(LocalDate employmentDate) {
+        this.employmentDate = employmentDate;
     }
 
     public LocalDate getBirthDay() {

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.SubjectDto;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Subject;
 import com.example.demo.repository.SubjectRepository;
@@ -43,7 +44,15 @@ public class SubjectService {
     }
 
     public Subject saveSubject(Subject subject) {
+
+        validateSubjectScoring(subject);
         return subjectRepository.save(subject);
+    }
+
+    private void validateSubjectScoring(Subject subject) {
+        if(subject.getCoursePercent() + subject.getSeminaryPercent() != 100) {
+            throw new BadRequestException("Subject scoring percent must be 100%", "subject.scoring.must.sum.invalid");
+        }
     }
 
 //    public void deleteSubject(Long id) {
