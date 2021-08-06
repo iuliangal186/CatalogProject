@@ -1,12 +1,26 @@
 package com.example.demo.dto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class TeacherBasicInfoDto {
 
     private Long id;
+
+    @NotEmpty(message = "firstName.cannot.be.empty")
+    @NotBlank(message = "firstName.cannot.be.blank")
+    @NotNull(message = "firstName.cannot.be.null")
     private String firstName;
+
+    @NotNull(message = "lastName.cannot.be.null")
+    @NotEmpty(message = "lastName.cannot.be.empty")
+    @NotBlank(message = "lastName.cannot.be.blank")
     private String lastName;
+
+    @Valid
     List<SubjectDto> subjects;
 
     public Long getId() {

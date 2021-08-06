@@ -76,7 +76,7 @@ public class SubjectService {
             subjectUpdated.setId(id);
             return subjectRepository.save(subjectUpdated);
         } else {
-            throw new RuntimeException("Subject not found");
+            throw new NotFoundException("Subject not found", "subject.not.found");
         }
     }
 
@@ -93,7 +93,7 @@ public class SubjectService {
 
             return subjectRepository.save(subjectUpdated);
         } else {
-            throw new RuntimeException("Subject not found");
+            throw new NotFoundException("Subject not found", "subject.not.found");
         }
     }
 

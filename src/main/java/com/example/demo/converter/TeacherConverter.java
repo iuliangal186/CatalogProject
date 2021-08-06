@@ -38,4 +38,18 @@ public class TeacherConverter {
         }
         return teacherDto;
     }
+
+    public Teacher mapToEntity(TeacherDto dto) {
+        Teacher teacher = new Teacher();
+        teacher.setEmploymentDate(dto.getEmploymentDate());
+        teacher.setBirthDate(dto.getBirthDay());
+        teacher.setFirstName(dto.getFirstName());
+        teacher.setLastName(dto.getLastName());
+        teacher.setCnp(dto.getCnp());
+        teacher.setSalary(dto.getSalary());
+        if(dto.getSubjects() != null) {
+            teacher.setSubjects(subjectConverter.mapToEntities(dto.getSubjects()));
+        }
+        return teacher;
+    }
 }
